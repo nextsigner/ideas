@@ -28,6 +28,10 @@ ApplicationWindow {
             text: 'Buscar Idea a Apoyar'
             onClicked: mensaje.text='Hola boton 2'
         }
+        Button{
+            text: 'Super Boton'
+            onClicked: mensaje.text='Hola boton 2'
+        }
         Text {
             id: mensaje
             font.pixelSize: 30
