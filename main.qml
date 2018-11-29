@@ -101,7 +101,7 @@ ApplicationWindow {
         repeat: false
         interval: 2000
         onTriggered: {
-            unik.run('"C:/Users/qt/AppData/Local/Programs/Python/Python37-32/python.exe" "E:/nsp/unik-dev-apps/ideas/proyecto.py"')
+            unik.run('"C:/Users/Usuarios/AppData/Local/Programs/Python/Python37-32/python.exe" "C:/Users/Usuario/Documents/unik/ideas/proyecto.py"')
         }
     }
     function procesar(l){
