@@ -158,7 +158,7 @@ ApplicationWindow {
         repeat: false
         interval: 2000
         onTriggered: {
-            unik.run('"'+appSettings.ubicacionExePython+'" "'+appSettings.ubicacionCodigoPython+'"')
+            iniciarPython()
         }
     }
     FileDialog {
@@ -190,6 +190,7 @@ ApplicationWindow {
             var f0=fileDialog2.fileUrls[0]
             appSettings.ubicacionCodigoPython=(''+f0).replace('file:///','')
             console.log('Código Python: '+(''+f0).replace('file:///',''))
+            iniciarPython()
         }
         onRejected: {
 
@@ -210,6 +211,9 @@ ApplicationWindow {
         console.log('Ubicación del Ejecutable Python: '+appSettings.ubicacionExePython)
         console.log('Ubicación del Código Python: '+appSettings.ubicacionCodigoPython)
 
+    }
+    function iniciarPython(){
+        unik.run('"'+appSettings.ubicacionExePython+'" "'+appSettings.ubicacionCodigoPython+'"')
     }
     function procesar(l){
         var m0
