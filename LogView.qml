@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.4
+import QtGraphicalEffects 1.0
 Rectangle{
     id:raiz
     width: parent.width
@@ -133,12 +134,69 @@ Rectangle{
             height: raiz.fontSize*1.6
             spacing: raiz.fontSize
             Boton{
+                id:btnFD1
+                w:parent.height
+                h: w
+                t: ''
+                b: raiz.bgColor
+                c:raiz.fontColor
+                d:'Ejecutable Python'
+                tp:1
+                 z:btnFD2.z+1
+                Image{
+                    id:icon1
+                    source: './python-brands.svg'
+                    width:parent.width
+                    height: width
+                    anchors.centerIn: parent
+                }
+                ColorOverlay {
+                        anchors.fill: icon1
+                        source: icon1
+                        color: raiz.fontColor
+                    }
+                onClicking: {
+                    fileDialog1.visible=true
+                }
+            }
+            Boton{
+                id:btnFD2
+                w:parent.height
+                h: w
+                t: '\uf15c'
+                b: raiz.bgColor
+                c:raiz.fontColor
+                d:'Código Python'
+                /*Image{
+                    id:icon2
+                    source: './file-alt-solid.svg'
+                    width:parent.width
+                    height: width
+                    anchors.centerIn: parent
+                }
+                ColorOverlay {
+                        anchors.fill: icon2
+                        source: icon2
+                        color: raiz.fontColor
+                    }*/
+                onClicking: {
+                    fileDialog2.visible=true
+                }
+            }
+
+            Item{
+                width: parent.height*2
+                height: width
+            }
+
+            Boton{
                 id:btnDown
                 w:parent.height
                 h: w
                 t: '\uf063'
                 b: raiz.bgColor
                 c: raiz.fontColor
+
                 onClicking: {
                     raiz.height=0+lineRTop.height
                 }

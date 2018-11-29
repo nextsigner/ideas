@@ -11,7 +11,7 @@ Rectangle{
     property int paso: 0
     onVisibleChanged: {
         if(visible){
-            //unik.writeRun('1\n')
+                r.paso=0
         }
     }
     onPasoChanged: {
@@ -25,6 +25,11 @@ Rectangle{
         Row{
             spacing: app.fs
             visible:r.paso===1
+            onVisibleChanged: {
+                if(visible){
+                    tiNumDoc.focus=true
+                }
+            }
             Text{
                 id:t1
                 text: 'Ingrese Nùmero de Documento: '
@@ -34,11 +39,11 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width-t1.contentWidth-app.fs*2
-                height: 24
+                height: 30
                 TextInput{
                     id:tiNumDoc
-                    width: parent.width
-                    height: 20
+                    width: parent.width-app.fs
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
                     Keys.onReturnPressed: unik.writeRun(text+'\n')
@@ -50,6 +55,11 @@ Rectangle{
         Column{
             spacing: app.fs*0.5
             visible:r.paso===2
+            onVisibleChanged: {
+                if(visible){
+                    tiNomPer.focus=true
+                }
+            }
             Text{
                 id:t2
                 text: 'Ingrese el Nombre de la Persona: '
@@ -59,11 +69,11 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiNomPer
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
                     Keys.onReturnPressed: unik.writeRun(text+'\n')
@@ -75,6 +85,11 @@ Rectangle{
         Row{
             spacing: app.fs*0.5
             visible:r.paso===3
+            onVisibleChanged: {
+                if(visible){
+                    tiNumCuenta.focus=true
+                }
+            }
             Text{
                 id:t3
                 text: 'Ingrese Nùmero de Cuenta donde se podrà hacer el aporte: '
@@ -84,11 +99,11 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiNumCuenta
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
                     Keys.onReturnPressed: unik.writeRun(text+'\n')
@@ -100,6 +115,11 @@ Rectangle{
         //4
         Column{
             visible:r.paso===4
+            onVisibleChanged: {
+                if(visible){
+                    tiLink.focus=true
+                }
+            }
             Text{
                 text: 'Ingrese el Link de una pàgina web donde se pueda profundizar la descripciòn del programa: '
                 font.pixelSize: 20
@@ -108,11 +128,11 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiLink
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
                     Keys.onReturnPressed: unik.writeRun(text+'\n')
@@ -124,6 +144,11 @@ Rectangle{
         //5-1
         Row{
             visible:r.paso===5
+            onVisibleChanged: {
+                if(visible){
+                    tiAnio.focus=true
+                }
+            }
             Text{
                 text: 'Ingrese la año de terminación: '
                 font.pixelSize: 20
@@ -132,14 +157,17 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiAnio
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
-                    Keys.onReturnPressed: r.paso++
+                    Keys.onReturnPressed: {
+                        unik.writeRun(text+'\n')
+                        r.paso++
+                    }
                 }
             }
 
@@ -147,6 +175,11 @@ Rectangle{
         //5-2
         Row{
             visible:r.paso===6
+            onVisibleChanged: {
+                if(visible){
+                    tiMes.focus=true
+                }
+            }
             Text{
                 text: 'Ingrese el mes de terminación: '
                 font.pixelSize: 20
@@ -155,14 +188,17 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiMes
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
-                    Keys.onReturnPressed: r.paso++
+                    Keys.onReturnPressed: {
+                        unik.writeRun(text+'\n')
+                        r.paso++
+                    }
                 }
             }
 
@@ -170,6 +206,11 @@ Rectangle{
         //5-3
         Row{
             visible:r.paso===7
+            onVisibleChanged: {
+                if(visible){
+                    tiDia.focus=true
+                }
+            }
             Text{
                 text: 'Ingrese el día de terminación: '
                 font.pixelSize: 20
@@ -178,14 +219,17 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiDia
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
-                    Keys.onReturnPressed: r.paso=8
+                    Keys.onReturnPressed: {
+                        unik.writeRun(text+'\n')
+                        r.paso=8
+                    }
                 }
             }
 
@@ -194,6 +238,11 @@ Rectangle{
         //6
         Row{
             visible:r.paso===8
+            onVisibleChanged: {
+                if(visible){
+                    tiNomIdea.focus=true
+                }
+            }
             Text{
                 text: 'Ingrese el nombre de la idea: '
                 font.pixelSize: 20
@@ -202,11 +251,11 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiNomIdea
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
                     Keys.onReturnPressed: unik.writeRun(text+'\n')
@@ -217,6 +266,11 @@ Rectangle{
         //7
         Column{
             visible:r.paso===9
+            onVisibleChanged: {
+                if(visible){
+                    tiDes.focus=true
+                }
+            }
             Text{
                 text: 'Realice una descripciòn del producto del software y para que servirà cuando estè elaborado: '
                 font.pixelSize: 20
@@ -225,11 +279,11 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiDes
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
                     Keys.onReturnPressed: unik.writeRun(text+'\n')
@@ -240,6 +294,11 @@ Rectangle{
         //8
         Row{
             visible:r.paso===10
+            onVisibleChanged: {
+                if(visible){
+                    tiNomCampo.focus=true
+                }
+            }
             Text{
                 text: 'Ingrese el campo en que se desarrolla la idea (Salud, Comercio, etc): '
                 font.pixelSize: 20
@@ -248,11 +307,11 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiNomCampo
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
                     Keys.onReturnPressed: unik.writeRun(text+'\n')
@@ -263,6 +322,11 @@ Rectangle{
         //9
         Row{
             visible:r.paso===11
+            onVisibleChanged: {
+                if(visible){
+                    tiValMinAporte.focus=true
+                }
+            }
             Text{
                 text: 'Ingrese el valor del mìnimo aporte que se podrà realizar: '
                 font.pixelSize: 20
@@ -271,11 +335,11 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiValMinAporte
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
                     Keys.onReturnPressed: unik.writeRun(text+'\n')
@@ -286,6 +350,11 @@ Rectangle{
         //10
         Row{
             visible:r.paso===12
+            onVisibleChanged: {
+                if(visible){
+                    tiValMinIdea.focus=true
+                }
+            }
             Text{
                 text: 'Ingrese el valor mìnimo para poder elaborar la idea: '
                 font.pixelSize: 20
@@ -294,16 +363,24 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 24
+                height: 30
                 TextInput{
                     id:tiValMinIdea
                     width: r.width-app.fs
-                    height: 20
+                    height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
-                    Keys.onReturnPressed: unik.writeRun(text+'\n')
+                    Keys.onReturnPressed: {
+                        unik.writeRun(text+'\n')
+                        xApp.focus=true
+                    }
                 }
             }
         }
+    }
+
+    Text{
+        text: 'Paso '+r.paso+' de 12'
+        font.pixelSize: 20
     }
 }
