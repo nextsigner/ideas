@@ -1,0 +1,10 @@
+Personas:
+	Natalia Soledad Pintos
+	Oscar Nuñez Calzada
+	Laura Jaramillo
+	Natalia Gutierrez
+
+Empresas:
+	Digia Qt Project
+	Movistar Argentina
+		
