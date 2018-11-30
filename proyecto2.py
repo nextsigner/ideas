@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import shelve
 
 
@@ -48,15 +50,15 @@ class Donador:
         self.direccion = d
         self.codigoadon = cad
 class Fecha:
-    año = 0
+    ano = 0
     mes = 0
     dia = 0
     def __init__ (self,a,m,d):
-        self.año = a
+        self.ano = a
         self.mes = m
         self.dia = d
     def crearfecha(self):
-        return (str(self.año)+"/"+str(self.mes)+"/"+str(self.dia))
+        return (str(self.ano)+"/"+str(self.mes)+"/"+str(self.dia))
     
 def adicionar(cosa,arreglo):
     arreglo.append(cosa)
@@ -65,10 +67,10 @@ def crearcodigo (documento,fecha):
     codigo = ""
     codigo = documento+fecha
     return codigo
-def actualizarestado (año,mes,dia,ideas):
+def actualizarestado (ano,mes,dia,ideas):
     rta= ""
     for vc in range (len(ideas)):
-        if (ideas[vc].fechater.año == año):
+        if (ideas[vc].fechater.ano == ano):
             if(ideas[vc].fechater.mes == mes):
                 if(ideas[vc].fechater.dia > dia):
                     rta = "SI"
@@ -84,9 +86,9 @@ def actualizarestado (año,mes,dia,ideas):
                         rta = "NO PERO TAMPOCO"                        
             if( ideas[vc].fechater.mes > mes):
                 rta = "SI"                
-        if(ideas[vc].fechater.año > año):
+        if(ideas[vc].fechater.ano > ano):
             rta = "SI"            
-        if(ideas[vc].fechater.año < año):
+        if(ideas[vc].fechater.ano < ano):
             if(ideas[vc].valoract >= ideas[vc].mindinero):
                 rta = "NO PERO SI"
             if(ideas[vc].valoract < ideas[vc].mindinero):
@@ -109,10 +111,10 @@ while (opc != "8"):
                          input("Ingrese el numero de cuenta donde se podra hacer el aporte:  "),
                          input("Ingrese el link de una pagina web donde se pueda profundizar la descripcion del programa:  "))
         adicionar(persona,personas)
-        año = int(input("Ingrese la fecha de terminacion:  Año(AAAA): "))
+        ano = int(input("Ingrese la fecha de terminacion:  Ano(AAAA): "))
         mes = int(input("                                  Mes(MM):  "))
         dia = int(input("                                  Día(DD):  "))
-        fechater = Fecha(año,mes,dia)
+        fechater = Fecha(ano,mes,dia)
         idea = Idea(input("Ingrese el nombre de la idea:  "),
                     input("Realice una descripcion del producto del software, y para que servira cuando este elaborado:  "),
                     input ("Ingrese el campo en que se desarrolla la idea (salud, comercio, etc.):  "),
@@ -146,10 +148,10 @@ while (opc != "8"):
             if(donantes[vc].codigoadon == codigo):
                 print("\n#Nombre de donante:  " + donantes[vc].nombre + " Valor donado: " + str(donantes[vc].valordon))
     elif( opc == "5"):
-        año = input("Igrese la fecha de hoy: Año(AAAA): ")
+        ano = input("Igrese la fecha de hoy: Ano(AAAA): ")
         mes = input("                        Mes(MM): ")
         dia = input("                        Día(DD): ")
-        actualizarestado(año,mes,dia,ideas)
+        actualizarestado(ano,mes,dia,ideas)
         for vc in range (len(ideas)):
             if(ideas[vc].estado == "Cerrado y no cumplió meta"):
                 for i in range (len(donantes)):

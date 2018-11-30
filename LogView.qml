@@ -196,7 +196,8 @@ Rectangle{
                 t: '\uf063'
                 b: raiz.bgColor
                 c: raiz.fontColor
-
+                d:'Bajar LogView'
+                tp:1
                 onClicking: {
                     raiz.height=0+lineRTop.height
                 }
@@ -208,6 +209,8 @@ Rectangle{
                 t: ''
                 b: raiz.bgColor
                 c: raiz.fontColor
+                d:raiz.showPlainText?'Ver como HTML':'Ver como Texto Plano'
+                tp:1
                 onClicking: {
                     raiz.showPlainText=!raiz.showPlainText
                 }
@@ -226,6 +229,8 @@ Rectangle{
                 t: '\uf12d'
                 b: raiz.bgColor
                 c: raiz.fontColor
+                d:'Limpiar LogView'
+                tp:1
                 onClicking: {
                     logTxt.text=''
                 }
@@ -237,6 +242,8 @@ Rectangle{
                 t: '<b>?</b>'
                 b: raiz.bgColor
                 c: raiz.fontColor
+                d:'Ver Ayuda'
+                tp:1
                 onClicking: {
                     logTxt.text+=raiz.help
                     fk.contentY=fk.contentHeight-fk.height
@@ -247,23 +254,7 @@ Rectangle{
             Item{
                 width: parent.height
                 height: width
-            }
-
-            Boton{//a unik-tools
-                w:parent.height
-                h: w
-                t: '\uf015'
-                b: raiz.bgColor
-                c: raiz.fontColor
-                visible: !raiz.enUnikTools
-                onClicking: {
-                    //unik.mainWindow(1).close();
-                    var main=appsDir+'/unik-tools/main.qml'
-                    unik.log('Loading Unik-Tools Home: '+main)
-                    engine.load(main)
-                }
-            }
-
+            }            
             Boton{//Restart
                 w:parent.height
                 h: w
@@ -271,8 +262,10 @@ Rectangle{
                 b: raiz.bgColor
                 c: raiz.fontColor
                 visible: !raiz.enUnikTools
+                d:'Reiniciar Ideas'
+                tp:1
                 onClicking: {
-                    unik.restartApp()
+                    unik.restartApp('-cfg')
                 }
                 Text {
                     text: "\uf011"
@@ -288,6 +281,8 @@ Rectangle{
                 t: "\uf011"
                 b: raiz.bgColor
                 c: raiz.fontColor
+                d:'Apagar'
+                tp:1
                 visible: !raiz.enUnikTools
                 onClicking: {
                     Qt.quit()

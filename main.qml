@@ -1,3 +1,30 @@
+/*
+  Esta aplicaciòn fue desarrollada por David Ramos
+  utilizando el FrameWork Qt, QtQuick, Unik y Python
+
+  Todo el SoftWare es Còdigo Abierto, Open Source
+  bajo las licencias GPL y LGPL.
+
+  Qml es un lenguaje de Programaciòn para el desarrollo
+  ràpido de aplicaciones del tipo Qt Quick.
+
+  QtQuick parte del FrameWork Qt.
+  Fuè creado por el Qt Project
+  como una nueva manera, màs dinàmica y àgil
+  de programar aplicaciones Qt
+  con Interfaz Gràficas de Ûltima Generaciòn.
+
+  Este còdigo està programado en QML, el Qt Meta Lenguaje
+  de Qt para el entorno QtQuick.
+
+  Qml es un lenguaje Declarativo Basado en JavaScript,
+   es por este motivo que para programar las funciones lògicas
+   que nos conectan con Python, utilizamos funciones JavaScript
+   conjuntamente con el motor Qml Unik para interactuar
+   con procesos QProccess cuya Salida Estandar supervisamos
+   en un elemento Qml que hemos denominado LogView.
+
+*/
 import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
@@ -12,6 +39,7 @@ ApplicationWindow {
     title: "Menu Donaciònes"
     color: "white"
     visibility: 'Maximized'
+    property string moduleName: 'ideas'
     property int area: -1
     property int fs: width*0.02
 
@@ -32,7 +60,7 @@ ApplicationWindow {
 
         property int lvh
     }
-   Item{
+    Item{
         id:xApp
         anchors.fill: parent
         Connections {target: unik;onUkStdChanged: procesar((''+unik.ukStd));}
@@ -111,6 +139,12 @@ ApplicationWindow {
         Xcd{
             id:xCd
         }//Cargar Donación
+        Xed{
+            id:xEd
+        }//Enlistar donantes
+        Xfa{
+            id:xFa
+        }//Fecha de Actualizaciòn
         Xca{
             id:xCa
         }//Cargar Archivo
@@ -143,6 +177,14 @@ ApplicationWindow {
             app.area=3
             unik.writeRun('3\n')
         }
+        Keys.onDigit4Pressed: {
+            app.area=4
+            unik.writeRun('4\n')
+        }
+        Keys.onDigit5Pressed: {
+            app.area=5
+            unik.writeRun('5\n')
+        }
         Keys.onDigit6Pressed: {
             app.area=6
             unik.writeRun('6\n')
@@ -167,8 +209,14 @@ ApplicationWindow {
         visible: false
         onAccepted: {
             var f0=fileDialog1.fileUrls[0]
-            appSettings.ubicacionExePython=f0
-            console.log('Ejecutable Python: '+f0)
+            var f1
+            if(Qt.platform.os==='windows'){
+                f1=(''+f0).replace('file:///','')
+            }else{
+                f1=(''+f0).replace('file://','')
+            }
+            appSettings.ubicacionExePython=f1
+            console.log('Ejecutable Python: '+f1)
         }
         onRejected: {
 
@@ -188,8 +236,14 @@ ApplicationWindow {
         visible: false
         onAccepted: {
             var f0=fileDialog2.fileUrls[0]
-            appSettings.ubicacionCodigoPython=(''+f0).replace('file:///','')
-            console.log('Código Python: '+(''+f0).replace('file:///',''))
+            var f1
+            if(Qt.platform.os==='windows'){
+                f1=(''+f0).replace('file:///','')
+            }else{
+                f1=(''+f0).replace('file://','')
+            }
+            appSettings.ubicacionCodigoPython=f1
+            console.log('Código Python: '+f1)
             iniciarPython()
         }
         onRejected: {
@@ -208,9 +262,33 @@ ApplicationWindow {
         }
     }
     Component.onCompleted: {
+
+
+        //->[1] Creamos de manera automàtica un archivo del tipo .ukl para que la aplicaciòn ideas aparezca en la lista de aplicaciones instaladas en unik.
+        var ukldata='-folder='+appsDir+'/'+app.moduleName+' -cfg'
+        var ukl=appsDir+'/link_'+app.moduleName+'.ukl'
+        unik.setFile(ukl, ukldata)
+        //<-[1]
+
+
+        //->[2] Creamos automàticamente un Acceso Directo en el Escritorio para ejecutar ideas
+        ukldata='-folder='+appsDir+'/'+app.moduleName+' -git=https://github.com/nextsigner/ideas.git -cfg'
+        ukl=appsDir+'/link_'+app.moduleName+'_update.ukl'
+        unik.setFile(ukl, ukldata)
+        var nclink
+        if(Qt.platform.os==='linux'){
+            nclink = '-folder='+appsDir+'/ideas -cfg'
+            unik.createLink(appExec+' -folder='+appsDir+'/ideas -cfg', unik.getPath(6)+'/ideas.desktop', 'ideas', 'It is created by Unik Qml Engine with the UnikTools')
+        }
+        if(Qt.platform.os==='windows'){
+            var flc='-folder='+appsDir+'/ideas -cfg'
+            unik.createLink(appExec, flc+add, unik.getPath(6)+'/ideas.lnk',"It is a file created by Unik Qml Engine", appsDir+'/ideas' )
+        }
+        //<-[2]
+
+        //Mostramos informaciòn en LogView con el mètodo JavaScript llamado console.log()
         console.log('Ubicación del Ejecutable Python: '+appSettings.ubicacionExePython)
         console.log('Ubicación del Código Python: '+appSettings.ubicacionCodigoPython)
-
     }
     function iniciarPython(){
         unik.run('"'+appSettings.ubicacionExePython+'" "'+appSettings.ubicacionCodigoPython+'"')
@@ -219,6 +297,13 @@ ApplicationWindow {
         var m0
         //Buscar Idea
         if((''+l).indexOf("#Nombre de Creador:")>=0){
+            m0=(''+l).split('1)Adicionar idea')
+            xV1.txt=m0[0]
+            xV1.visible=true
+            return
+        }
+        //Lista Donantes
+        if((''+l).indexOf("#Nombre de donante:")>=0){
             m0=(''+l).split('1)Adicionar idea')
             xV1.txt=m0[0]
             xV1.visible=true
@@ -241,7 +326,7 @@ ApplicationWindow {
             xFd.paso=3
             return
         }
-         if((''+l).indexOf('Ingrese el link de una pagina web donde se pueda profundizar la descripcion del programa')>=0){
+        if((''+l).indexOf('Ingrese el link de una pagina web donde se pueda profundizar la descripcion del programa')>=0){
             xFd.paso=4
             return
         }
