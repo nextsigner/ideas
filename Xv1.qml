@@ -7,7 +7,6 @@ Rectangle{
     height: parent.height
     anchors.centerIn: parent
     visible:false
-    //color: 'red'
     property alias txt: t1.text
     Flickable{
         width: r.width-app.fs*2

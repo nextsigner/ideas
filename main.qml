@@ -268,21 +268,23 @@ ApplicationWindow {
         var ukldata='-folder='+appsDir+'/'+app.moduleName+' -cfg'
         var ukl=appsDir+'/link_'+app.moduleName+'.ukl'
         unik.setFile(ukl, ukldata)
+        ukldata='-folder='+appsDir+'/'+app.moduleName+' -git=https://github.com/nextsigner/ideas.git -cfg'
+        ukl=appsDir+'/link_'+app.moduleName+'_update.ukl'
+        unik.setFile(ukl, ukldata)
         //<-[1]
 
 
         //->[2] Creamos automàticamente un Acceso Directo en el Escritorio para ejecutar ideas
-        ukldata='-folder='+appsDir+'/'+app.moduleName+' -git=https://github.com/nextsigner/ideas.git -cfg'
-        ukl=appsDir+'/link_'+app.moduleName+'_update.ukl'
-        unik.setFile(ukl, ukldata)
         var nclink
         if(Qt.platform.os==='linux'){
-            nclink = '-folder='+appsDir+'/ideas -cfg'
             unik.createLink(appExec+' -folder='+appsDir+'/ideas -cfg', unik.getPath(6)+'/ideas.desktop', 'ideas', 'It is created by Unik Qml Engine with the UnikTools')
+            unik.createLink(appExec+' -folder='+appsDir+'/ideas -git=https://github.com/nextsigner/ideas.git  -cfg', unik.getPath(6)+'/ideas_update.desktop', 'ideas_update', 'It is created by Unik Qml Engine with the UnikTools')
         }
         if(Qt.platform.os==='windows'){
             var flc='-folder='+appsDir+'/ideas -cfg'
-            unik.createLink(appExec, flc+add, unik.getPath(6)+'/ideas.lnk',"It is a file created by Unik Qml Engine", appsDir+'/ideas' )
+            var flc2='-folder='+appsDir+'/ideas -git=https://github.com/nextsigner/ideas.git -cfg'
+            unik.createLink(appExec, flc, unik.getPath(6)+'/ideas.lnk',"It is a file created by Unik Qml Engine", appsDir+'/ideas' )
+            unik.createLink(appExec, flc2, unik.getPath(6)+'/ideas_update.lnk',"It is a file created by Unik Qml Engine", appsDir+'/ideas' )
         }
         //<-[2]
 
