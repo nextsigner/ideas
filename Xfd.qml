@@ -11,7 +11,7 @@ Rectangle{
     property int paso: 0
     onVisibleChanged: {
         if(visible){
-                r.paso=0
+            r.paso=0
         }
     }
     onPasoChanged: {
@@ -23,7 +23,7 @@ Rectangle{
 
         //1
         Row{
-            spacing: app.fs
+            spacing: app.fs*0.5
             visible:r.paso===1
             onVisibleChanged: {
                 if(visible){
@@ -98,11 +98,11 @@ Rectangle{
             Rectangle{
                 border.width: 2
                 radius: 6
-                width: r.width
+                width: app.fs*10
                 height: 30
                 TextInput{
                     id:tiNumCuenta
-                    width: r.width-app.fs
+                    width: parent.width-app.fs
                     height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
@@ -115,6 +115,7 @@ Rectangle{
         //4
         Column{
             visible:r.paso===4
+            spacing: app.fs*0.5
             onVisibleChanged: {
                 if(visible){
                     tiLink.focus=true
@@ -131,7 +132,7 @@ Rectangle{
                 height: 30
                 TextInput{
                     id:tiLink
-                    width: r.width-app.fs
+                    width: parent.width-app.fs
                     height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
@@ -144,23 +145,24 @@ Rectangle{
         //5-1
         Row{
             visible:r.paso===5
+            spacing: app.fs*0.5
             onVisibleChanged: {
                 if(visible){
                     tiAnio.focus=true
                 }
             }
             Text{
-                text: 'Ingrese la año de terminación: '
+                text: 'Ingrese la año de terminación: (Año AAAA)'
                 font.pixelSize: 20
             }
             Rectangle{
                 border.width: 2
                 radius: 6
-                width: r.width
+                width: app.fs*10
                 height: 30
                 TextInput{
                     id:tiAnio
-                    width: r.width-app.fs
+                    width: parent.width-app.fs
                     height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
@@ -175,23 +177,24 @@ Rectangle{
         //5-2
         Row{
             visible:r.paso===6
+            spacing: app.fs*0.5
             onVisibleChanged: {
                 if(visible){
                     tiMes.focus=true
                 }
             }
             Text{
-                text: 'Ingrese el mes de terminación: '
+                text: 'Ingrese el mes de terminación: (Mes MM)'
                 font.pixelSize: 20
             }
             Rectangle{
                 border.width: 2
                 radius: 6
-                width: r.width
+                width: app.fs*10
                 height: 30
                 TextInput{
                     id:tiMes
-                    width: r.width-app.fs
+                    width: parent.width-app.fs
                     height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
@@ -201,28 +204,28 @@ Rectangle{
                     }
                 }
             }
-
         }
         //5-3
         Row{
             visible:r.paso===7
+            spacing: app.fs*0.5
             onVisibleChanged: {
                 if(visible){
                     tiDia.focus=true
                 }
             }
             Text{
-                text: 'Ingrese el día de terminación: '
+                text: 'Ingrese el día de terminación: (Dìa DD)'
                 font.pixelSize: 20
             }
             Rectangle{
                 border.width: 2
                 radius: 6
-                width: r.width
+                width: app.fs*10
                 height: 30
                 TextInput{
                     id:tiDia
-                    width: r.width-app.fs
+                    width: parent.width-app.fs
                     height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
@@ -238,6 +241,7 @@ Rectangle{
         //6
         Row{
             visible:r.paso===8
+            spacing: app.fs*0.5
             onVisibleChanged: {
                 if(visible){
                     tiNomIdea.focus=true
@@ -250,11 +254,11 @@ Rectangle{
             Rectangle{
                 border.width: 2
                 radius: 6
-                width: r.width
+                width: app.fs*16
                 height: 30
                 TextInput{
                     id:tiNomIdea
-                    width: r.width-app.fs
+                    width: parent.width-app.fs
                     height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
@@ -279,11 +283,11 @@ Rectangle{
                 border.width: 2
                 radius: 6
                 width: r.width
-                height: 30
-                TextInput{
+                height: app.fs*11
+                TextArea{
                     id:tiDes
                     width: r.width-app.fs
-                    height: 24
+                    height: app.fs*10
                     font.pixelSize: 20
                     anchors.centerIn: parent
                     Keys.onReturnPressed: unik.writeRun(text+'\n')
@@ -292,29 +296,37 @@ Rectangle{
         }
 
         //8
-        Row{
+        Column{
             visible:r.paso===10
+            spacing: app.fs*0.5
             onVisibleChanged: {
                 if(visible){
                     tiNomCampo.focus=true
                 }
             }
             Text{
-                text: 'Ingrese el campo en que se desarrolla la idea (Salud, Comercio, etc): '
+                text: 'Ingrese el campo en que se desarrolla la idea (Salud, Comercio, etc)'
                 font.pixelSize: 20
             }
-            Rectangle{
-                border.width: 2
-                radius: 6
-                width: r.width
-                height: 30
-                TextInput{
-                    id:tiNomCampo
-                    width: r.width-app.fs
-                    height: 24
+            Row{
+                spacing: app.fs*0.5
+                Text{
+                    text: 'Campo: '
                     font.pixelSize: 20
-                    anchors.centerIn: parent
-                    Keys.onReturnPressed: unik.writeRun(text+'\n')
+                }
+                Rectangle{
+                    border.width: 2
+                    radius: 6
+                    width: app.fs*10
+                    height: 30
+                    TextInput{
+                        id:tiNomCampo
+                        width: parent.width-app.fs
+                        height: 24
+                        font.pixelSize: 20
+                        anchors.centerIn: parent
+                        Keys.onReturnPressed: unik.writeRun(text+'\n')
+                    }
                 }
             }
         }
@@ -322,6 +334,7 @@ Rectangle{
         //9
         Row{
             visible:r.paso===11
+            spacing: app.fs*0.5
             onVisibleChanged: {
                 if(visible){
                     tiValMinAporte.focus=true
@@ -334,11 +347,11 @@ Rectangle{
             Rectangle{
                 border.width: 2
                 radius: 6
-                width: r.width
+                width: app.fs*10
                 height: 30
                 TextInput{
                     id:tiValMinAporte
-                    width: r.width-app.fs
+                    width: parent.width-app.fs
                     height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent
@@ -350,6 +363,7 @@ Rectangle{
         //10
         Row{
             visible:r.paso===12
+            spacing: app.fs*0.5
             onVisibleChanged: {
                 if(visible){
                     tiValMinIdea.focus=true
@@ -362,11 +376,11 @@ Rectangle{
             Rectangle{
                 border.width: 2
                 radius: 6
-                width: r.width
+                width: app.fs*10
                 height: 30
                 TextInput{
                     id:tiValMinIdea
-                    width: r.width-app.fs
+                    width: parent.width-app.fs
                     height: 24
                     font.pixelSize: 20
                     anchors.centerIn: parent

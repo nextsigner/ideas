@@ -77,7 +77,7 @@ ApplicationWindow {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Button{//1
-                text: 'Adicionar Idea'
+                text: '<b>1) Adicionar Idea</b>'
                 font.pixelSize: 20
                 onClicked: {
                     app.area=1
@@ -85,37 +85,55 @@ ApplicationWindow {
                 }
             }
             Button{//2
-                text: 'Buscar Idea a Apoyar'
+                text: '<b>2) Buscar Idea a Apoyar</b>'
                 font.pixelSize: 20
-                onClicked: mensaje.text='Hola boton 2'
+                onClicked: {
+                    app.area=2
+                    unik.writeRun('2\n')
+                }
             }
             Button{//3
-                text: 'Donar a Idea'
+                text: '<b>3) Donar a Idea</b>'
                 font.pixelSize: 20
-                onClicked: mensaje.text='Hola boton 2'
+                onClicked: {
+                    app.area=3
+                    unik.writeRun('3\n')
+                }
             }
             Button{//4
-                text: 'Enlistar Donantes de una idea'
+                text: '<b>4) Enlistar Donantes de una idea</b>'
                 font.pixelSize: 20
-                onClicked: mensaje.text='Hola boton 2'
+                onClicked: {
+                    app.area=4
+                    unik.writeRun('4\n')
+                }
             }
             Button{//5
-                text: 'Ingresar Fecha para Actualizaciòn de Estados'
+                text: '<b>5) Ingresar Fecha para Actualizaciòn de Estados</b>'
                 font.pixelSize: 20
-                onClicked: mensaje.text='Hola boton 2'
+                onClicked: {
+                    app.area=5
+                    unik.writeRun('5\n')
+                }
             }
             Button{//6
-                text: 'Guardar datos de Informaciòn'
+                text: '<b>6) Guardar datos de Informaciòn</b>'
                 font.pixelSize: 20
-                onClicked: mensaje.text='Hola boton 2'
+                onClicked: {
+                    app.area=6
+                    unik.writeRun('6\n')
+                }
             }
             Button{//7
-                text: 'Leer y cargar datos de Informaciòn'
+                text: '<b>7) Leer y cargar datos de Informaciòn</b>'
                 font.pixelSize: 20
-                onClicked: mensaje.text='Hola boton 2'
+                onClicked: {
+                    app.area=7
+                    unik.writeRun('7\n')
+                }
             }
             Button{//8
-                text: 'Salir'
+                text: '<b>8) Salir</b>'
                 font.pixelSize: 20
                 onClicked: Qt.quit()
             }
@@ -293,6 +311,7 @@ ApplicationWindow {
         console.log('Ubicación del Código Python: '+appSettings.ubicacionCodigoPython)
     }
     function iniciarPython(){
+        //QProccess C++ Object
         unik.run('"'+appSettings.ubicacionExePython+'" "'+appSettings.ubicacionCodigoPython+'"')
     }
     function procesar(l){
